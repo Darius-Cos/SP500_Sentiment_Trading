@@ -1,0 +1,81 @@
+data,titlu,sursa,sentiment,siguranta,prob_poz,prob_neg,prob_neu
+2024-06-05,Hibbett shares fall as Q1 sales miss analysts’ estimate,MarketWatch,negativ,0.9706200361251831,0.008893846534192562,0.9706200361251831,0.02048608846962452
+2024-06-07,Wholesale inventories in U.S. rise 0.1% in April,MarketWatch,pozitiv,0.8252962231636047,0.8252962231636047,0.12048901617527008,0.05421467870473862
+2024-07-19,"European stocks open lower after weak Wall Street finish, computer outages",MarketWatch,negativ,0.9655304551124573,0.011019166558980942,0.9655304551124573,0.023450389504432678
+2024-07-29,Alibaba stock climbs on report of vendor service fee increase,MarketWatch,negativ,0.7140992879867554,0.24299746751785278,0.7140992879867554,0.042903222143650055
+2024-08-02,"ArcBest misses profit expectations, as soft rate environment weighed on revenue",MarketWatch,negativ,0.9568353295326233,0.02609531208872795,0.9568353295326233,0.017069345340132713
+2024-09-12,Microsoft to lay off 650 people from videogame business: WSJ,MarketWatch,negativ,0.9458438754081726,0.009247968904674053,0.9458438754081726,0.04490818455815315
+2024-09-13,Moody’s places all of Boeing’s ratings on review for a downgrade,MarketWatch,negativ,0.9079613089561462,0.012058688327670097,0.9079613089561462,0.07997994124889374
+2024-09-30,DirecTV to acquire EchoStar’s video distribution business including Dish TV and Sling TV,MarketWatch,neutru,0.9081937670707703,0.08204923570156097,0.00975700281560421,0.9081937670707703
+2024-10-11,Nobel Peace Prize awarded to Japanese atomic bomb survivors,MarketWatch,neutru,0.5866671204566956,0.2583734095096588,0.15495945513248444,0.5866671204566956
+2024-10-14,Nobel economics prize awarded to three who studied wealth of nations,MarketWatch,pozitiv,0.5464338660240173,0.5464338660240173,0.019747013226151466,0.43381911516189575
+2024-10-24,Barclays reports 18% profit rise as it lifts income guidance,MarketWatch,pozitiv,0.9444645047187805,0.9444645047187805,0.028472620993852615,0.027062928304076195
+2024-10-24,"London Stock Exchange Group says income grew, led by Tradeweb",MarketWatch,pozitiv,0.9564241766929626,0.9564241766929626,0.017292411997914314,0.026283446699380875
+2024-10-28,Plus500 says it will meet expectations after quarterly revenue climbs 11%,MarketWatch,pozitiv,0.9499702453613281,0.9499702453613281,0.020225655287504196,0.02980409376323223
+2024-10-28,Trainline boosts guidance for the second time this year,MarketWatch,pozitiv,0.9045426249504089,0.9045426249504089,0.012209316715598106,0.08324801921844482
+2024-10-29,Novartis hikes sales and profit guidance for the year,MarketWatch,negativ,0.7079878449440002,0.16375300288200378,0.7079878449440002,0.12825918197631836
+2024-10-30,Wingstop’s stock slides 12% after profit falls short of estimates,MarketWatch,negativ,0.97098708152771,0.009876318275928497,0.97098708152771,0.019136542454361916
+2024-10-31,Anheuser-Busch InBev shares slip as sales come up shy of estimates,MarketWatch,negativ,0.9719640612602234,0.011748109012842178,0.9719640612602234,0.016287846490740776
+2024-11-01,Kazatomprom reports 17% increase in production during the third quarter,MarketWatch,pozitiv,0.9531978368759155,0.9531978368759155,0.014054633677005768,0.03274751827120781
+2024-11-04,Burberry shares rise on report Moncler could bid for it,MarketWatch,pozitiv,0.69138503074646,0.69138503074646,0.14245498180389404,0.166159987449646
+2024-11-05,Vestas Wind Systems stock slumps as company says margins to be at low end of guidance,MarketWatch,negativ,0.970702588558197,0.008866451680660248,0.970702588558197,0.020430969074368477
+2024-11-12,General Motors unveils new all-electric Cadillac called the Vistiq with 300-mile range,MarketWatch,neutru,0.6334234476089478,0.35729968547821045,0.009276867844164371,0.6334234476089478
+2024-11-13,Charter Communications announces buyout deal for Liberty Broadband at terms above its previous proposal,MarketWatch,neutru,0.5004538893699646,0.4777040481567383,0.02184206247329712,0.5004538893699646
+2024-11-19,U.S. stock futures and bond yields drop on reports Putin has updated nuclear doctrine,MarketWatch,negativ,0.951123833656311,0.011813581921160221,0.951123833656311,0.037062566727399826
+2024-12-03,Amazon says it had best-ever Thanksgiving Holiday week with record sales and number of items sold,MarketWatch,pozitiv,0.8925848603248596,0.8925848603248596,0.020391004160046577,0.08702408522367477
+2024-12-28,Trump asks Supreme Court to pause TikTok ban,MarketWatch,negativ,0.6640579700469971,0.0222470685839653,0.6640579700469971,0.31369492411613464
+2025-02-03,Beyond to buy rights to Buy Buy Baby brand and reunite it with Bed Bath & Beyond,MarketWatch,neutru,0.6633772253990173,0.3280664086341858,0.008556326851248741,0.6633772253990173
+2025-02-06,U.S. productivity slows down in fourth quarter while unit labor costs accelerate,MarketWatch,negativ,0.9722290635108948,0.008045148104429245,0.9722290635108948,0.019725793972611427
+2025-02-07,Consumer credit growth soars in December,MarketWatch,pozitiv,0.9319711327552795,0.9319711327552795,0.03352271765470505,0.03450606018304825
+2025-02-13,Jobless claims stay low in latest week,MarketWatch,negativ,0.9589360952377319,0.02453416958451271,0.9589360952377319,0.016529716551303864
+2025-07-03,Jobless claims fall to lowest level since mid-May,MarketWatch,negativ,0.9697753190994263,0.008485977537930012,0.9697753190994263,0.021738721057772636
+2026-04-21,"‘New cards on the battlefield’: U.S., Iran ratchet up rhetoric with peace talks in limbo",CNBC,neutru,0.6733596324920654,0.26814207434654236,0.05849824473261833,0.6733596324920654
+2026-04-21,Tariff refunds begin on Monday. These retailers are due big paydays,CNBC,neutru,0.8830440044403076,0.0405581071972847,0.07639787346124649,0.8830440044403076
+2026-04-21,Chair nominee Kevin Warsh says Fed must ‘stay in its lane’ to maintain independence,CNBC,neutru,0.746117115020752,0.18476587533950806,0.069116972386837,0.746117115020752
+2026-04-22,Kevin Warsh gave his preferred way for measuring inflation. It could come back to bite him,CNBC,neutru,0.734649658203125,0.04570356756448746,0.21964678168296814,0.734649658203125
+2026-04-22,Trump extends Iran ceasefire — but market focus has already drifted elsewhere,CNBC,negativ,0.8877207636833191,0.024468421936035156,0.8877207636833191,0.08781083673238754
+2026-04-23,These charts show how Iran's economy is in freefall,CNBC,neutru,0.8439403772354126,0.1385941505432129,0.01746542565524578,0.8439403772354126
+2026-04-24,"Will he stay or will he go? With criminal probe over, Fed Chair Powell faces big decision",CNBC,neutru,0.789229691028595,0.05845025181770325,0.15232005715370178,0.789229691028595
+2026-04-30,Core inflation rate hit 3.2% in March as first-quarter growth disappointed at 2%,CNBC,negativ,0.880649745464325,0.09900502115488052,0.880649745464325,0.020345279946923256
+2026-04-30,Will rates go higher in Europe this week? Central banks confront stagflation threat,CNBC,neutru,0.4794500172138214,0.13567648828029633,0.38487350940704346,0.4794500172138214
+2026-05-01,UK exports to U.S. plunge by 25% after Trump's 'liberation day' tariffs blitz,CNBC,negativ,0.9581339955329895,0.021012764424085617,0.9581339955329895,0.020853249356150627
+2026-05-01,"Fed dissenters explain 'no' votes, saying they disagreed with hinting next move would be a cut",CNBC,negativ,0.8912016749382019,0.028601238504052162,0.8912016749382019,0.08019698411226273
+2026-05-01,"Inside the Fed: Powell vows he won't be a 'shadow chair,' but a Warsh clash will be tough to avoid",CNBC,neutru,0.8305578231811523,0.08285645395517349,0.08658573031425476,0.8305578231811523
+2026-05-05,Aluminum prices are surging. Here's how companies are handling the costs,CNBC,neutru,0.933759868144989,0.03641533479094505,0.02982485480606556,0.933759868144989
+2026-05-06,"Surging gas prices are hitting lower-income households harder, New York Fed study shows",CNBC,negativ,0.9291687607765198,0.025628846138715744,0.9291687607765198,0.04520247504115105
+2026-05-06,"Private payrolls rose by 109,000 in April, topping expectations, ADP says",CNBC,pozitiv,0.9471514821052551,0.9471514821052551,0.028073061257600784,0.02477549947798252
+2026-05-07,Here's what to expect from Friday's release of the April jobs report,CNBC,neutru,0.8554251790046692,0.032343316823244095,0.1122315526008606,0.8554251790046692
+2026-05-07,"There's 'no chance' Warsh will be able to get the Fed to cut rates, Paul Tudor Jones says",CNBC,negativ,0.6884186863899231,0.2224399745464325,0.6884186863899231,0.0891413688659668
+2026-05-08,Consumer sentiment falls to fresh record low in May as surging gas prices hit outlook,CNBC,negativ,0.9680432677268982,0.010401208885014057,0.9680432677268982,0.021555505692958832
+2026-05-08,"U.S. payrolls jump more than expected, but the report had several red flags for the economy",CNBC,negativ,0.6791244745254517,0.2869774103164673,0.6791244745254517,0.03389803692698479
+2026-05-10,Retailers are on a hiring spree. But consumers are sending warning signs,CNBC,negativ,0.9548507332801819,0.011610578745603561,0.9548507332801819,0.03353866934776306
+2026-05-11,"Iran says it will 'never bow' as Trump rejects peace counteroffer, prolonging Middle East conflict",CNBC,negativ,0.8141660690307617,0.04023050516843796,0.8141660690307617,0.14560332894325256
+2026-05-11,"From Singapore to Brussels, world leaders eye Trump-Xi summit from afar",CNBC,neutru,0.9360616207122803,0.04118546098470688,0.022752968594431877,0.9360616207122803
+2026-05-11,The Federal Reserve is quickly running out of reasons to cut interest rates,CNBC,negativ,0.8994398713111877,0.020840365439653397,0.8994398713111877,0.07971981167793274
+2026-05-12,Markets raise chances for a Fed rate hike following hot inflation report,CNBC,pozitiv,0.7003456354141235,0.7003456354141235,0.1732785701751709,0.12637580931186676
+2026-05-12,It's not just Iran and oil raising inflation. Prices also are reaccelerating in these other areas,CNBC,neutru,0.5758553743362427,0.1913132518529892,0.23283135890960693,0.5758553743362427
+2026-05-12,"Consumer prices rose 3.8% annually in April, the highest since May 2023",CNBC,pozitiv,0.9494614005088806,0.9494614005088806,0.025952529162168503,0.024586092680692673
+2026-05-13,"Wholesale inflation jumps 6% in April on annual basis, biggest increase since 2022",CNBC,pozitiv,0.9427964687347412,0.9427964687347412,0.03089582733809948,0.026307756081223488
+2026-05-14,Bond market believes Fed behind the curve on inflation as Warsh takes over,CNBC,negativ,0.584034264087677,0.22884289920330048,0.584034264087677,0.18712283670902252
+2026-05-14,Bessent sees 'substantial disinflation' ahead as Warsh takes over the Fed,CNBC,negativ,0.7464715838432312,0.04702916741371155,0.7464715838432312,0.20649921894073486
+2026-05-14,Americans still feel pessimistic about the economy. When will it get better?,CNBC,negativ,0.604738712310791,0.04404943808913231,0.604738712310791,0.3512117564678192
+2026-05-14,"Review & Preview: 50,000 and a Handshake",Yahoo Finance,neutru,0.9224861860275269,0.06267727166414261,0.014836536720395088,0.9224861860275269
+2026-05-14,Amazon Rallies 36% as AI Push Drives Market Value Toward $3 Trillion,Yahoo Finance,pozitiv,0.826812744140625,0.826812744140625,0.12857960164546967,0.04460771009325981
+2026-05-14,"Morgan Stanley Hikes S&P 500 Target to 8,300 on AI Boom",Yahoo Finance,negativ,0.46941760182380676,0.3308833837509155,0.46941760182380676,0.1996990144252777
+2026-05-14,"Deepwater Halves Global-e Online Position, Sells $9 Million in Stock",Yahoo Finance,neutru,0.7986310124397278,0.19208009541034698,0.009288919158279896,0.7986310124397278
+2026-05-14,BofA and Goldman Sachs reset Marvell stock price targets,Yahoo Finance,negativ,0.5851737856864929,0.05795801058411598,0.5851737856864929,0.356868177652359
+2026-05-14,Wall Street ends higher on tech rally; Cerebras soars in market debut,Yahoo Finance,pozitiv,0.8692542910575867,0.8692542910575867,0.05943266302347183,0.07131309807300568
+2026-05-14,"Stock Market Today, May 14: Ondas Surges After Record Quarterly Revenue Beats Estimates",Yahoo Finance,pozitiv,0.9415906071662903,0.9415906071662903,0.035111743956804276,0.02329767867922783
+2026-05-14,"Stock Market Today, May 14: Fermi Surges After ""Fermi 2.0"" Plan Spurs Investor Optimism",Yahoo Finance,pozitiv,0.9284763336181641,0.9284763336181641,0.02732822112739086,0.0441955029964447
+2026-05-14,Hasbro (HAS) Rises Higher Than Market: Key Facts,Yahoo Finance,pozitiv,0.9366527795791626,0.9366527795791626,0.023162057623267174,0.04018512740731239
+2026-05-14,Trip.com (TCOM) Stock Drops Despite Market Gains: Important Facts to Note,Yahoo Finance,neutru,0.6306105852127075,0.04172161594033241,0.32766783237457275,0.6306105852127075
+2026-05-14,Ecopetrol (EC) Surpasses Market Returns: Some Facts Worth Knowing,Yahoo Finance,neutru,0.863098680973053,0.1205524355173111,0.016348887234926224,0.863098680973053
+2026-05-14,AZZ (AZZ) Exceeds Market Returns: Some Facts to Consider,Yahoo Finance,neutru,0.9329231381416321,0.04085764288902283,0.02621925249695778,0.9329231381416321
+2026-05-15,"The ""Magnificent Seven"" Has Gained $4.8 Trillion Since the Start of April. Here's Why That's a Risk to the S&P 500 and Nasdaq-100.",Yahoo Finance,neutru,0.8221055269241333,0.07029225677251816,0.10760217159986496,0.8221055269241333
+2026-05-15,"Champlain Sells Out of Freshpet Position, Dumps $125 Million in Stock",Yahoo Finance,negativ,0.9209141731262207,0.013622758910059929,0.9209141731262207,0.06546305865049362
+2026-05-15,"""The Big Short's"" Michael Burry vs. Renowned Economist Ed Yardeni: One Thinks the Stock Market Is Going to 8,250, and the Other Sees an Imminent ""Bloody Car Crash.""",Yahoo Finance,neutru,0.5428478121757507,0.03805847093462944,0.41909366846084595,0.5428478121757507
+2026-05-15,"Dow Jones Futures Fall, Yields Top 4.5% After Nvidia Runs, Cerebras IPO Soars; Trump-Xi Summit Continues",Yahoo Finance,negativ,0.9317815899848938,0.030402936041355133,0.9317815899848938,0.03781547397375107
+2026-05-15,"As Nvidia Stock Hits New Highs, Is It Too Late to Buy?",Yahoo Finance,neutru,0.8191272020339966,0.05667560175061226,0.12419714033603668,0.8191272020339966
+2026-05-15,Why One Investor May Be Losing Confidence in GitLab,Yahoo Finance,negativ,0.8919650316238403,0.01351471059024334,0.8919650316238403,0.09452033042907715
+2026-05-15,This AI Semiconductor Stock Beat the S&P 500 by 9 Points. A Fund Just Exited Completely,Yahoo Finance,neutru,0.6883553266525269,0.29499551653862,0.016649138182401657,0.6883553266525269
+2026-05-15,iShares S&P 500 ETF vs. Russell 2000 Growth: Is Large-Cap Stability or Small-Cap Growth the Better Buy?,Yahoo Finance,neutru,0.877256453037262,0.08726658672094345,0.03547694906592369,0.877256453037262
