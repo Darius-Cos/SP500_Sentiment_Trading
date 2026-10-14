@@ -1,170 +1,190 @@
-# S&P 500 Sentiment Trading
+# S&P 500 Sentiment Trading | FinBERT + XGBoost
 
-Sistem de predicție a direcției indicelui S&P 500 pentru ziua următoare,
-bazat pe analiza sentimentului știrilor financiare (FinBERT) combinată cu indicatori tehnici clasici.
+A Python machine-learning pipeline that combines **financial news sentiment** with **market indicators** to predict the next trading day's direction of the S&P 500 index. The project uses **FinBERT** for financial-language sentiment analysis and **XGBoost** for binary classification, with walk-forward evaluation and a simple trading-strategy backtest.
 
----
+> **Core question:** Given recent market movements and today's financial headlines, is the S&P 500 more likely to close higher or lower on the next trading day?
 
-## Ce face proiectul
+## Overview
 
-Răspunde la o singură întrebare:
+Price-based prediction projects typically rely only on historical returns and technical indicators. This experiment adds a separate information source: **the tone of financial news headlines**.
 
-> **"Bazându-mă pe știrile de azi și pe cum s-a mișcat piața recent — va crește sau va scădea S&P 500 mâine?"**
+It investigates whether market indicators and sentiment-derived features can be combined in a time-aware classification workflow. The results are research-oriented, **not a reliable forecast or trading recommendation**.
 
-Majoritatea proiectelor de predicție bursieră folosesc doar prețurile istorice.
-Acesta adaugă un strat de NLP cu un model antrenat special pe texte financiare (FinBERT),
-combinând două surse de informație complet diferite: **date de piață** și **știri**.
+## End-to-End Pipeline
 
----
-
-## Structura proiectului
-
+```text
+S&P 500 prices (^GSPC)       Financial news RSS
+           |                        |
+           v                        v
+     OHLCV dataset             FinBERT inference
+           |                        |
+           |                  Daily sentiment
+           |                        |
+           +-----------+------------+
+                       |
+                       v
+                Feature Engineering
+                       |
+                       v
+             XGBoost Classification
+                       |
+                       v
+           Walk-Forward Validation
+                       |
+                       v
+           Reports + Trading Backtest
 ```
-sp500-sentiment-trading/
-│
+
+## Repository Structure
+
+```text
+SP500_Sentiment_Trading/
 ├── src/
-│   ├── 1_collect_data.py           # Descarcă prețuri și știri
-│   ├── 2_sentiment_analysis.py     # Analizează sentimentul cu FinBERT
-│   ├── 3_feature_engineering.py    # Creează features pentru model
-│   ├── 4_train_model.py            # Antrenează XGBoost
-│   └── 5_evaluate.py               # Grafice și backtest
-│
+│   ├── 1_collect_data.py           # Prices and financial headlines
+│   ├── 2_sentiment_analysis.py     # FinBERT sentiment inference
+│   ├── 3_feature_engineering.py    # Market and sentiment predictors
+│   ├── 4_train_model.py            # XGBoost + walk-forward validation
+│   ├── 5_evaluate.py               # Metrics, charts, strategy backtest
+│   └── collect_data.py             # Additional data-collection script
 ├── data/
-│   ├── raw/                        # Date brute descărcate
-│   │   ├── prices_raw.csv          # Prețuri zilnice S&P 500
-│   │   └── news_raw.csv            # Titluri știri financiare
-│   └── processed/                  # Date procesate
-│       ├── news_with_sentiment.csv # Știri cu scor sentiment per articol
-│       ├── sentiment_daily.csv     # Scor sentiment agregat per zi
-│       ├── features.csv            # Matricea finală pentru model
-│       ├── predictions.csv         # Predicțiile walk-forward
-│       ├── walk_forward_results.csv# Metrici per fold
-│       ├── feature_importance.csv  # Importanța features
-│       └── backtest_data.csv       # Datele backtestului
-│
+│   ├── raw/
+│   │   ├── prices_raw.csv
+│   │   └── news_raw.csv
+│   └── processed/
+│       ├── news_with_sentiment.csv
+│       ├── sentiment_daily.csv
+│       ├── features.csv
+│       ├── predictions.csv
+│       ├── walk_forward_results.csv
+│       ├── feature_importance.csv
+│       └── backtest_data.csv
 ├── models/
-│   ├── xgb_classifier.pkl          # Modelul XGBoost antrenat
-│   └── feature_cols.pkl            # Lista de features (ordinea contează)
-│
+│   ├── xgb_classifier.pkl          # Trained classifier
+│   └── feature_cols.pkl            # Saved feature ordering
 ├── reports/
-│   ├── confusion_matrix.png        # Câte predicții corecte vs greșite
-│   ├── feature_importance.png      # Ce variabile contează cel mai mult
-│   ├── fold_performance.png        # Performanța în timp per fold
-│   └── backtest_returns.png        # Strategia noastră vs buy & hold
-│
-├── run_all.py                      # Rulează tot pipeline-ul dintr-o comandă
-├── requirements.txt                # Toate dependențele Python
-├── .env.example                    # Template pentru chei API
-└── .gitignore                      # Ce nu urcăm pe GitHub
+│   ├── confusion_matrix.png
+│   ├── feature_importance.png
+│   ├── fold_performance.png
+│   └── backtest_returns.png
+├── run_all.py                      # Run all five stages
+├── requirements.txt
+└── README.md
 ```
 
----
+## How Each Stage Works
 
-## Ce face fiecare fișier
+### 1. Collect market data and financial news
 
-### `src/1_collect_data.py` — Colectare date
-Descarcă datele brute din două surse gratuite:
-- **Prețuri S&P 500** prin librăria `yfinance` — ticker `^GSPC`, ultimii 2 ani, coloanele Open/High/Low/Close/Volume
-- **Știri financiare** prin feed-uri RSS publice (Reuters, CNBC, MarketWatch, Yahoo Finance) — fiecare articol cu data și titlul
+`src/1_collect_data.py` uses `yfinance` to request approximately two years of daily S&P 500 prices (ticker `^GSPC`) and `feedparser` to read financial-news RSS feeds (including sources configured for Reuters, CNBC, MarketWatch, and Yahoo Finance).
 
-Salvează: `data/raw/prices_raw.csv` și `data/raw/news_raw.csv`
+Outputs: `data/raw/prices_raw.csv` and `data/raw/news_raw.csv`.
 
----
+**Data limitation:** RSS feeds commonly expose only recent articles, not two years of historical news. Live feeds can change, become unavailable, or provide incomplete coverage. Historical price and news coverage therefore need to be checked before drawing conclusions about model performance.
 
-### `src/2_sentiment_analysis.py` — Analiza sentimentului (FinBERT)
-Trece fiecare titlu de știre prin modelul **FinBERT** (un BERT antrenat special pe texte financiare) și obține trei probabilități: pozitiv, negativ, neutru.
+### 2. Analyze sentiment with FinBERT
 
-De ce FinBERT și nu ceva mai simplu? Instrumentele generice ca VADER nu înțeleg contextul financiar. "Earnings miss" sună neutru dar e negativ. FinBERT știe asta.
+`src/2_sentiment_analysis.py` loads `ProsusAI/finbert` from Hugging Face and evaluates headlines in batches. The model assigns probabilities to **positive**, **negative**, and **neutral** sentiment. The script aggregates headline-level results into daily sentiment indicators.
 
-Agregă scorurile per articol într-un **scor zilnic unic** prin medie ponderată — articolele unde modelul e mai sigur contează mai mult.
+Why FinBERT? A finance-adapted language model can handle domain terms such as *earnings miss* or *guidance cut* better than a generic keyword-based lexicon.
 
-Scorul final e între **-1** (toate știrile extrem de negative) și **+1** (toate pozitive).
+Outputs: `data/processed/news_with_sentiment.csv` and `data/processed/sentiment_daily.csv`.
 
-Salvează: `data/processed/news_with_sentiment.csv` și `data/processed/sentiment_daily.csv`
+### 3. Engineer prediction features
 
----
+`src/3_feature_engineering.py` merges daily market information with sentiment and produces numerical predictors.
 
-### `src/3_feature_engineering.py` — Pregătirea features
-Combină prețurile cu sentimentul zilnic și calculează variabilele pe care le va primi modelul:
+| Feature group | Examples | Motivation |
+|---|---|---|
+| Returns | Daily, 5-day and 20-day returns | Recent price movement |
+| Momentum | RSI (14), MACD | Trend and overbought/oversold indicators |
+| Volatility | Rolling volatility, ATR (14) | Market variability |
+| Price / volume | Relative volume, close vs. moving average | Trading activity and trend |
+| Sentiment | FinBERT score, lagged scores, rolling averages | Current and recent news tone |
+| News activity | Number of articles | Coverage intensity |
 
-**Features din prețuri:**
-- `randament_zilnic` — cât % a crescut/scăzut prețul față de ieri
-- `randament_5zile`, `randament_20zile` — randamentul pe o săptămână / lună
-- `rsi_14` — Relative Strength Index: e piața supraîncălzită (>70) sau supravândută (<30)?
-- `volatilitate_5zile`, `volatilitate_20zile` — cât de mult oscilează prețul
-- `atr_14` — Average True Range: volatilitatea intraday
-- `macd` — diferența dintre două medii mobile (semnal de trend)
-- `raport_volum` — volumul de azi față de media pe 20 de zile
-- `pret_vs_medie20` — prețul față de media mobilă pe 20 de zile
+The binary target is based on whether the next trading day's closing price is higher (`1`) or not (`0`).
 
-**Features din sentiment:**
-- `sentiment_score` — scorul zilnic din FinBERT
-- `sentiment_lag_1zi`, `_2zi`, `_3zi` — sentimentul din zilele anterioare
-- `sentiment_medie_5zi`, `_20zi` — media mobilă a sentimentului
-- `schimbare_sentiment` — saltul de sentiment față de ieri
-- `article_count` — câte știri au apărut în ziua respectivă
+Output: `data/processed/features.csv`.
 
-**Target (ce prezice modelul):**
-- `1` dacă S&P 500 a închis mai sus a doua zi
-- `0` dacă a închis mai jos
+### 4. Train and validate XGBoost
 
-Salvează: `data/processed/features.csv`
+`src/4_train_model.py` uses an XGBoost classifier, tests six predefined hyperparameter combinations, considers class imbalance with `scale_pos_weight`, and evaluates sequentially using expanding-window **walk-forward validation**.
 
----
+A simplified illustration:
 
-### `src/4_train_model.py` — Antrenarea modelului
-Antrenează un clasificator **XGBoost** pe matricea de features.
-
-XGBoost construiește sute de arbori de decizie mici, fiecare corectând greșelile celui anterior. La final, decizia colectivă e mult mai precisă decât a oricărui arbore individual.
-
-**Grid search** — testează 6 combinații de hiperparametri și o alege pe cea mai bună.
-
-**Walk-forward validation** — metodă corectă de evaluare pe date de timp:
+```text
+Fold 1: Train [days 1..252]   -> Test [days 253..315]
+Fold 2: Train [days 1..315]   -> Test [days 316..378]
+Fold 3: Train [days 1..378]   -> Test [days 379..441]
 ```
-Fold 1: Antrenament [ziua 1 → 252]      Test [ziua 253 → 315]
-Fold 2: Antrenament [ziua 1 → 315]      Test [ziua 316 → 378]
-Fold 3: Antrenament [ziua 1 → 378]      Test [ziua 379 → 441]
-...
-```
-La fiecare pas, testul se face pe date pe care modelul nu le-a văzut niciodată — exact cum funcționează în realitate.
 
-Salvează: `models/xgb_classifier.pkl`, `data/processed/predictions.csv`, `data/processed/feature_importance.csv`
+The temporal split matters: random shuffling can leak future patterns into the training set and lead to unrealistic estimates of performance.
 
----
+Outputs include a trained model and predictions/feature-importance tables under `models/` and `data/processed/`.
 
-### `src/5_evaluate.py` — Evaluare și vizualizare
-Generează 4 grafice în folderul `reports/`:
+### 5. Evaluate and backtest
 
-- **confusion_matrix.png** — câte zile de creștere/scădere am prezis corect vs greșit
-- **feature_importance.png** — ce variabile a folosit cel mai mult XGBoost (dacă sentimentul apare primul, NLP-ul aduce valoare reală)
-- **fold_performance.png** — accuracy și F1 per fold în timp (modelul e consistent?)
-- **backtest_returns.png** — simulare: dacă am fi tranzacționat pe semnalele modelului vs buy & hold
+`src/5_evaluate.py` generates classification and strategy visualizations:
 
----
+| Report | What it shows |
+|---|---|
+| `confusion_matrix.png` | Correct and incorrect direction predictions |
+| `feature_importance.png` | Relative importance of model inputs |
+| `fold_performance.png` | Classification metrics across temporal folds |
+| `backtest_returns.png` | Simulated model signals versus a buy-and-hold baseline |
 
-### `run_all.py` — Rulează tot
-Rulează toate cele 5 etape în ordine. Dacă o etapă eșuează, oprește și afișează eroarea.
+Backtests are simplified simulations and may not include all realistic trading costs or constraints.
 
----
+## Example Visualizations
 
-## Cum pornești proiectul
+**Feature importance**
 
-### 1. Instalează dependențele (o singură dată)
+![Feature importance](reports/feature_importance.png)
+
+**Walk-forward performance**
+
+![Walk-forward performance](reports/fold_performance.png)
+
+**Strategy comparison**
+
+![Backtest returns](reports/backtest_returns.png)
+
+## Technology Stack
+
+| Category | Library | Role |
+|---|---|---|
+| Market data | `yfinance` | Download S&P 500 historical prices |
+| News | `feedparser` | Read RSS feeds |
+| NLP | Hugging Face `transformers`, FinBERT | Financial headline sentiment |
+| Deep learning runtime | PyTorch | Run FinBERT inference |
+| Tabular ML | XGBoost | Binary market-direction classification |
+| Data processing | Pandas, NumPy | Feature engineering |
+| Evaluation | scikit-learn | Accuracy, F1, confusion matrix |
+| Visualization | Matplotlib, Seaborn | Plots and reports |
+
+## Getting Started
+
+### 1. Clone and install dependencies
+
 ```bash
+git clone https://github.com/Darius-Cos/SP500_Sentiment_Trading.git
+cd SP500_Sentiment_Trading
+python -m venv .venv
+# Windows PowerShell:
+.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
-Pe Mac, dacă apare eroare cu XGBoost:
-```bash
-brew install libomp
-```
+The first sentiment run downloads FinBERT model files. On some macOS installations, XGBoost may require OpenMP (`brew install libomp`).
 
-### 2. Rulează tot pipeline-ul
+### 2. Run the complete workflow
+
 ```bash
 python run_all.py
 ```
 
-Sau etapă cu etapă:
+Or run one stage at a time:
+
 ```bash
 python src/1_collect_data.py
 python src/2_sentiment_analysis.py
@@ -173,53 +193,29 @@ python src/4_train_model.py
 python src/5_evaluate.py
 ```
 
-### 3. Timp aproximativ de rulare
+### 3. Review generated results
 
-| Etapă | Durată |
-|---|---|
-| 1. Colectare date | ~1 minut |
-| 2. Sentiment FinBERT | ~10-20 minute |
-| 3. Feature engineering | ~10 secunde |
-| 4. Antrenare model | ~3-5 minute |
-| 5. Evaluare și grafice | ~30 secunde |
+The numerical results are saved under `data/processed/`, trained artifacts under `models/`, and plots under `reports/`.
 
-### 4. Rezultatele finale
-Graficele se găsesc în `reports/` după ce rulezi etapa 5.
+> **Reproducibility note:** re-running data collection on a different date produces a different observation window; news feeds and upstream APIs may also differ. Use a fixed, dated dataset for comparable experimental results.
 
----
+## Concepts Demonstrated
 
-## Tehnologii folosite
+- Applying a pretrained NLP model to a specialized financial domain.
+- Combining text-derived sentiment with numerical time-series features.
+- RSI, ATR, MACD, and moving-window statistics.
+- Class imbalance and hyperparameter search in gradient-boosted trees.
+- Walk-forward evaluation and the prevention of look-ahead bias.
+- Comparing classification quality with a simple strategy simulation.
 
-| Categorie | Librărie | De ce |
-|---|---|---|
-| Date prețuri | `yfinance` | Gratuit, direct de pe Yahoo Finance |
-| Date știri | `feedparser` | Citește RSS feeds fără API key |
-| NLP / Sentiment | `transformers` (FinBERT) | Model specializat pe texte financiare |
-| Model clasificare | `xgboost` | Standard de industrie pentru date tabulare |
-| Evaluare | `scikit-learn` | Metrici, confusion matrix |
-| Vizualizare | `matplotlib`, `seaborn` | Grafice profesionale |
+## Limitations and Responsible Use
 
----
+- News data availability and publication timing can bias the dataset.
+- Historical price features must use only information available at prediction time.
+- Observed feature importance is not proof of causal predictive power.
+- Financial markets are noisy and non-stationary; an apparent backtest edge may disappear out of sample.
+- The project is educational and does **not** provide financial or investment advice.
 
-## Concepte cheie învățate
+## Author
 
-- **FinBERT inference** — cum se folosește un model NLP pre-antrenat pentru clasificare de sentiment
-- **Feature engineering** — cum se transformă date brute (prețuri, text) în variabile numerice utile
-- **RSI, ATR, MACD** — indicatori tehnici clasici implementați manual
-- **Walk-forward validation** — cum se evaluează corect un model pe date de timp fără data leakage
-- **scale_pos_weight** — cum se gestionează dezechilibrul de clase în XGBoost
-- **Backtesting** — cum se simulează o strategie de tranzacționare pentru a valida semnalele modelului
-
----
-
-## Disclaimer
-
-Acest proiect este realizat în scop educațional.
-Predicțiile modelului nu reprezintă sfaturi financiare și nu trebuie folosite pentru decizii reale de investiții.
-
----
-
-## Autor
-
-**[Numele tău]**
-[LinkedIn](#) · [GitHub](#)
+**Darius Costache** · [GitHub](https://github.com/Darius-Cos)
